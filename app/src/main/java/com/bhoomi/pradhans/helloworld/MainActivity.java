@@ -1,10 +1,12 @@
 package com.bhoomi.pradhans.helloworld;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,12 +18,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -57,7 +65,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveLocation(View view) {
-        Toast.makeText(this, "Serial Number is " + serialNumber, Toast.LENGTH_LONG).show();
+        SQLLiteConnection connection = new SQLLiteConnection(this);
+        SQLiteDatabase writableDatabase = connection.getWritableDatabase();
+
+        int count = listAdapter.getCount();
+        ArrayList<LatLongHolder> holders = new ArrayList<LatLongHolder>();
+        for(int i=0;i<count;i++){
+            holders.add(listAdapter.getItem(i));
+        }
+        Type type = new TypeToken<List<LatLongHolder>>(){}.getType();
+        String geo_points = new Gson().toJson(holders, type);
+
+        EditText editText = (EditText) findViewById(R.id.editText);
+        ContentValues values = new ContentValues();
+        values.put(BhutatraAttributes.DEVICE_ID,serialNumber);
+        values.put(BhutatraAttributes.GEO_POINTS,geo_points);
+        values.put(BhutatraAttributes.NAME,editText.getText().toString());
+        writableDatabase.insert("bhutatra",null,values);
     }
 
     public void removeLastLocation(View view) {

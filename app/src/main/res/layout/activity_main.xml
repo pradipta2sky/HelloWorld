@@ -3,16 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:fillViewport="true"
     tools:context=".MainActivity">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:id="@+id/LocationName"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+
+        android:text="Name : " />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LocationName"
+        android:orientation="horizontal"
+        android:id="@+id/Buttons"
+        >
 
         <Button
             android:id="@+id/remove_last"
@@ -20,7 +45,8 @@
             android:layout_height="wrap_content"
             android:text="Remove Last"
             android:layout_toRightOf="@+id/save"
-            android:onClick="removeLastLocation"/>
+            android:onClick="removeLastLocation"
+            android:layout_below="@+id/editText"/>
 
         <Button
             android:id="@+id/save"
@@ -28,225 +54,26 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/button1"
             android:text="Save"
-            android:onClick="saveLocation"/>
-
-        <!--<TextView-->
-            <!--android:id="@+id/titleTextGPS"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:text="GPS LOCATION"-->
-            <!--android:textSize="20sp"/>-->
-
-        <!-- Button
-            android:id="@+id/locationControllerGPS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/titleTextGPS"
-            android:layout_centerHorizontal="true"
-            android:onClick="toggleGPSUpdates"
-            android:text="@string/resume"
-            android:clickable="true"/ -->
+            android:onClick="saveLocation"
+            android:layout_below="@+id/editText"/>
 
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="toggleBestUpdates"
-            android:text="add" />
-
-        <!-- TextView
-            android:id="@+id/longitudeTextGPS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/locationControllerGPS"
-            android:text="longitude"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/longitudeValueGPS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/locationControllerGPS"
-            android:layout_toRightOf="@id/longitudeTextGPS"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="0.0000"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/latitudeTextGPS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/longitudeTextGPS"
-            android:text="latitude"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/latitudeValueGPS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/longitudeValueGPS"
-            android:layout_toRightOf="@id/longitudeTextGPS"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="0.0000"
-            android:textSize="20sp"/>
-
-        <View
-            android:id="@+id/separator1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/latitudeValueGPS"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@color/material_blue_grey_800"/>
-
-        <TextView
-            android:id="@+id/titleTextNetwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/separator1"
-            android:text="NETWORK LOCATION"
-            android:textSize="20sp"/>
-
-        <Button
-            android:id="@+id/locationControllerNetwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/titleTextNetwork"
-            android:text="@string/resume"
-            android:onClick="toggleNetworkUpdates"/>
-
-        <TextView
-            android:id="@+id/longitudeTextNetwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/locationControllerNetwork"
-            android:text="longitude"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/longitudeValueNetwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/locationControllerNetwork"
-            android:layout_toRightOf="@id/longitudeTextNetwork"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="0.0000"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/latitudeTextNetwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/longitudeTextNetwork"
-            android:text="latitude"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/latitudeValueNetwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/longitudeValueNetwork"
-            android:layout_toRightOf="@id/longitudeTextNetwork"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="0.0000"
-            android:textSize="20sp"/>
-
-        <View
-            android:id="@+id/separator2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/latitudeValueNetwork"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@color/material_blue_grey_800"/>
-
-        <TextView
-            android:id="@+id/titleTextBest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/separator2"
-            android:text="BEST LOCATION"
-            android:textSize="20sp"/>
-
-        <Button
-            android:id="@+id/locationControllerBest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/titleTextBest"
-            android:text="@string/resume"
-            android:onClick="toggleBestUpdates"/>
-
-        <TextView
-            android:id="@+id/longitudeTextBest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/locationControllerBest"
-            android:text="longitude"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/longitudeValueBest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/locationControllerBest"
-            android:layout_toRightOf="@id/longitudeTextBest"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="0.0000"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/latitudeTextBest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/longitudeTextBest"
-            android:text="latitude"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/latitudeValueBest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/longitudeValueBest"
-            android:layout_toRightOf="@id/longitudeTextBest"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="0.0000"
-            android:textSize="20sp"/>
-
-        <View
-            android:id="@+id/separator3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/latitudeValueBest"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@color/material_blue_grey_800"/>
-
-        <TextView
-            android:id="@+id/addressText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/separator3"
-            android:layout_centerHorizontal="true"
-            android:text="Address"
-            android:textSize="20sp"/ -->
-        <ListView android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/mainListView"
-            android:layout_below="@+id/button1">
-        </ListView>
-
-        <EditText
-            android:id="@+id/editText"
+            android:text="add"
+            />
+    </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/button1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:layout_below="@+id/Buttons"
+            android:orientation="horizontal">
+            <ListView android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/mainListView">
+            </ListView>
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>
